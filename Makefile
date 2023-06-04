@@ -29,11 +29,15 @@ model:
 			--grpc-gateway_out=. --grpc-gateway_opt=paths=source_relative \
 			$(MODEL_PROTO_FILES)
 
-.PHONY: build
-# build executable file under ./bin/
-build:
+.PHONY: buildserver
+buildserver:
 	mkdir -p bin/; \
-	go build -o ./bin/ ./...
+	go build -o ./bin/ ./server/...
+
+.PHONY: buildclient
+buildclient:
+	mkdir -p bin/; \
+	go build -o ./bin/ ./client/...
 
 .PHONY: all
 # generate all
