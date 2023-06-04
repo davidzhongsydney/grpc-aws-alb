@@ -12,6 +12,7 @@ import (
 	pb "golang.cafe/protobuf/model"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/reflection"
 )
 
 // implement the RouteGuideServer interface
@@ -59,9 +60,12 @@ func main() {
 	}
 
 	s := routeGuideServer{}
+
 	grpcServer := grpc.NewServer(
 		grpc.Creds(tlsCredentials),
 	)
+	reflection.Register(grpcServer)
+
 	pb.RegisterRouteGuideServer(grpcServer, &s)
 
 	go func() {

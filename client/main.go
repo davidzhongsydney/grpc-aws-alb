@@ -41,7 +41,6 @@ func main() {
 		log.Fatal("cannot load TLS credentials: ", err)
 	}
 
-	// grpc.Dial(*serverAddress, grpc.WithTransportCredentials(tlsCredentials))
 	conn, err = grpc.Dial("0.0.0.0:9000", grpc.WithTransportCredentials(tlsCredentials))
 
 	if err != nil {
